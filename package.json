@@ -1,0 +1,33 @@
+{
+  "name": "glob-tool-embed",
+  "version": "1.0.0",
+  "description": "A portable, embeddable version of the DO Community Glob tool.",
+  "license": "Apache-2.0",
+  "source": "src/index.js",
+  "main": "build/bundle.js",
+  "scripts": {
+    "build": "microbundle build",
+    "watch": "microbundle watch",
+    "test": "eslint 'src/**/*.js'",
+    "test:fix": "npm run test -- --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/do-community/glob-tool-embed.git"
+  },
+  "keywords": [
+    "glob"
+  ],
+  "author": "DigitalOcean",
+  "bugs": {
+    "url": "https://github.com/do-community/glob-tool-embed/issues"
+  },
+  "homepage": "https://github.com/do-community/glob-tool-embed#readme",
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "microbundle": "^0.12.0"
+  },
+  "dependencies": {
+    "minimatch": "^3.0.4"
+  }
+}
