@@ -16,6 +16,8 @@ limitations under the License.
 
 import minimatch from 'minimatch';
 import externalLinkIcon from './icons/external-link';
+import checkIcon from './icons/check';
+import xIcon from './icons/x';
 
 export default class GlobEmbed {
     /**
@@ -34,7 +36,7 @@ export default class GlobEmbed {
 
         // Get the test strings
         this.tests = [];
-        for (const attr of element.attributes) {
+        for (const attr of Array.from(element.attributes)) {
             if (attr.name.match(/^data-glob-test-\d+$/)) {
                 this.tests.push(attr.value);
                 element.removeAttribute(attr.name);
@@ -64,14 +66,62 @@ export default class GlobEmbed {
 
         // Heading
         const heading = document.createElement('h4');
-        heading.textContent = `Glob string: ${this.glob}`;
-        heading.style.fontSize = '15px';
-        heading.style.margin = '0 0 20px';
+        heading.textContent = 'Glob string: ';
+        heading.style.fontSize = '14px';
+        heading.style.margin = '0 0 10px';
+        const glob = document.createElement('code');
+        glob.textContent = this.glob;
+        glob.style.background = '#eee';
+        glob.style.border = '1px solid #ccc';
+        glob.style.padding = '0 8px 1px';
+        glob.style.borderRadius = '3px';
+        glob.style.fontSize = '15px';
+        glob.style.fontWeight = 'normal';
+        heading.appendChild(glob);
         this.element.appendChild(heading);
 
         // Render the content
-        // TODO
+        this.results.forEach(result => this.element.appendChild(this.result(result)));
         this.element.appendChild(this.button());
+    }
+
+    /**
+     * Convert a test string result object into a HTML div containing the match string and an icon indicating a match.
+     *
+     * @private
+     * @param {Boolean} match If this test string matched the provided glob string.
+     * @param {String} test The test string that was tested against the glob string.
+     * @returns {HTMLDivElement}
+     */
+    result({ match, test }) {
+        // Create the parent
+        const parent = document.createElement('div');
+        parent.style.display = 'flex';
+        parent.style.flexDirection = 'row';
+        parent.style.flexWrap = 'nowrap';
+        parent.style.color = match ? '#0069ff' : '#666';
+
+        // Create the icon
+        const icon = document.createElement('div');
+        icon.style.display = 'flex';
+        icon.style.alignItems = 'center';
+        icon.style.justifyContent = 'center';
+        icon.style.padding = '2px 6px';
+        icon.innerHTML = match ? checkIcon : xIcon;
+        icon.firstElementChild.removeAttribute('class');
+        icon.firstElementChild.removeAttribute('height');
+        icon.firstElementChild.setAttribute('width', '16px');
+        parent.appendChild(icon);
+
+        // Create the test string
+        const string = document.createElement('p');
+        string.style.flexGrow = '1';
+        string.style.margin = '0';
+        string.style.fontSize = '16px';
+        string.textContent = test;
+        parent.appendChild(string);
+
+        return parent;
     }
 
     /**
@@ -83,7 +133,7 @@ export default class GlobEmbed {
     button() {
         // Create the button
         const a = document.createElement('a');
-        a.href = `https://www.digitalocean.com/community/tools/glob?domain=${encodeURIComponent(this.glob)}&${this.tests.map(t => `tests=${encodeURIComponent(t)}`).join('&')}`;
+        a.href = `https://www.digitalocean.com/community/tools/glob?glob=${encodeURIComponent(this.glob)}&${this.tests.map(t => `tests=${encodeURIComponent(t)}`).join('&')}`;
         a.target = '_blank';
         a.textContent = `Explore this glob string in our full glob testing tool`;
         a.style.background = '#0069ff';
@@ -92,14 +142,14 @@ export default class GlobEmbed {
         a.style.color = '#fff';
         a.style.display = 'inline-block';
         a.style.fontSize = '14px';
-        a.style.margin = '15px 0 0';
+        a.style.margin = '10px 0 0';
         a.style.padding = '4px 12px 6px';
         a.style.textDecoration = 'none';
 
         // Add the external link
         const icon = document.createElement('div');
         icon.innerHTML = externalLinkIcon;
-        icon.firstElementChild.className = '';
+        icon.firstElementChild.removeAttribute('class');
         icon.firstElementChild.removeAttribute('width');
         icon.firstElementChild.setAttribute('height', '12px');
         icon.firstElementChild.style.display = 'inline-block';
