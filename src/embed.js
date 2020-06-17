@@ -135,7 +135,7 @@ export default class GlobEmbed {
         const a = document.createElement('a');
         a.href = `https://www.digitalocean.com/community/tools/glob?glob=${encodeURIComponent(this.glob)}&${this.tests.map(t => `tests=${encodeURIComponent(t)}`).join('&')}`;
         a.target = '_blank';
-        a.textContent = `Explore this glob string in our full glob testing tool`;
+        a.textContent = 'Explore this glob string in our full glob testing tool';
         a.style.background = '#0069ff';
         a.style.border = 'none';
         a.style.borderRadius = '3px';
