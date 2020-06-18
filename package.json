@@ -5,9 +5,10 @@
   "license": "Apache-2.0",
   "source": "src/index.js",
   "main": "build/bundle.js",
+  "type": "module",
   "scripts": {
-    "build": "parcel build src/index.js -d build --out-file bundle.js --experimental-scope-hoisting",
-    "watch": "parcel watch src/index.js -d build --out-file bundle.js",
+    "build": "microbundle build",
+    "watch": "microbundle watch",
     "test": "eslint 'src/**/*.js'",
     "test:fix": "npm run test -- --fix"
   },
@@ -25,7 +26,7 @@
   "homepage": "https://github.com/do-community/glob-tool-embed#readme",
   "devDependencies": {
     "eslint": "^7.2.0",
-    "parcel-bundler": "^1.12.4"
+    "microbundle": "^0.12.1"
   },
   "dependencies": {
     "minimatch": "^3.0.4"
