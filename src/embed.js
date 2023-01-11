@@ -1,5 +1,5 @@
 /*
-Copyright 2020 DigitalOcean
+Copyright 2023 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -15,9 +15,9 @@ limitations under the License.
 */
 
 import minimatch from 'minimatch';
-import externalLinkIcon from './icons/external-link';
-import checkIcon from './icons/check';
-import xIcon from './icons/x';
+import externalLinkIcon from './icons/external-link.js';
+import checkIcon from './icons/check.js';
+import xIcon from './icons/x.js';
 
 export default class GlobEmbed {
     /**
