@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import minimatch from 'minimatch';
+import { minimatch } from 'minimatch';
 import externalLinkIcon from './icons/external-link.js';
 import checkIcon from './icons/check.js';
 import xIcon from './icons/x.js';
@@ -160,4 +160,3 @@ export default class GlobEmbed {
         return a;
     }
 }
-
