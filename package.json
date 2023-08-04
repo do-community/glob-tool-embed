@@ -29,6 +29,6 @@
   "devDependencies": {
     "eslint": "^8.46.0",
     "microbundle": "^0.15.1",
-    "minimatch": "^5.1.6"
+    "minimatch": "^9.0.3"
   }
 }
