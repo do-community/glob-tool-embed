@@ -1,5 +1,5 @@
 /*
-Copyright 2023 DigitalOcean
+Copyright 2024 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -29,8 +29,11 @@ export default class GlobEmbed {
         // Save the elm
         this.element = element;
 
-        // Get the gob string and remove from elm
+        // Get the glob string and check we have it
         this.glob = element.getAttribute('data-glob-string');
+        if (!this.glob) throw new Error('Glob Embed missing required data-glob-string attribute');
+
+        // Clear out the attributes we don't need
         element.removeAttribute('data-glob-tool-embed');
         element.removeAttribute('data-glob-string');
 
@@ -42,6 +45,7 @@ export default class GlobEmbed {
                 element.removeAttribute(attr.name);
             }
         }
+        if (!this.tests.length) throw new Error('Glob Embed missing required data-glob-test-[0-9]+ attribute(s)');
 
         // Prep results store
         this.results = [];
