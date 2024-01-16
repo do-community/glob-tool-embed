@@ -1,5 +1,5 @@
 /*
-Copyright 2023 DigitalOcean
+Copyright 2024 DigitalOcean
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ window.GlobToolEmbeds = scope => {
     scope = scope || document;
 
     // Detect all valid embeds to run
-    const embedsElms = Array.from(scope.querySelectorAll('[data-glob-tool-embed][data-glob-string][data-glob-test-1]'));
+    const embedsElms = Array.from(scope.querySelectorAll('[data-glob-tool-embed]'));
 
     // Convert to GlobEmbed instances
     const embeds = embedsElms.map(x => new GlobEmbed(x));
